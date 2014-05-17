@@ -1,0 +1,94 @@
+︠c8f89931-bd1f-44e3-aeec-56b63154ae64︠
+@interact
+def __(Start = text_control("What would you like to do?"), Selections = selector(['Linear Algebra','Integrate','Differentiate',                             'Trig','Plot', 'nothing'], default='nothing', nrows=2, ncols=3,label = "Sections",buttons=False)):
+    if Selections == 'Linear Algebra':
+        @interact
+        def __(m = input_grid(1, 2, default=3, label='Matrix size: rows, colums', width=2)):
+            v = m[0]
+            @interact
+            def __(Enter_matrix = matrix(QQ, v[0], v[1], range(v[0] * v[1]))):
+                @interact
+                def __(Linear_Algebra = text_control("What would you like to do?"), solve_right =
+                       checkbox(False, label='Solve right') , ker = checkbox(False, label='Kernel'), eigenvalue =
+                       checkbox(False, label='Eigenvalues'), eigenvec = checkbox(False, label='Eigenvectors')):
+
+                    if solve_right == True:
+                        @interact
+                        def __(Enter_vector = matrix(QQ, v[1], 1, range(v[1]))):
+                            try:
+                                x = Enter_matrix\Enter_vector
+                                html('$$ %s %s = %s$$' %(latex(Enter_matrix), latex(x), latex(Enter_vector)))
+                            except:
+                                html('no solution to $$ %s x = %s$$' %(latex(Enter_matrix), latex(Enter_vector)))
+                    if ker == True:
+                        print kernel(Enter_matrix)
+                    if eigenvalue == True:
+                        print 'Eigenvalues'
+                        print Enter_matrix.eigenvalues()
+                    if eigenvec == True:
+                        print 'Eigenvectors'
+                        v = (Enter_matrix.eigenvectors_left())
+
+                        while i in range(len(v)):
+                            print v[i]
+    elif Selections == 'Integrate':
+        @interact
+        def __(a=input_box(e^x + x^2*log(x) + 5*cos(pi*x), 'What would you like to integrate?')):
+            b = a.integrate(x)
+            html('$$ \int (%s) dx = %s$$' %(latex(a), latex(b)))
+            @interact
+            def __(Integral = text_control("Would you like to see a plot?"), plotEq = checkbox(False, label='Equation plot') , inter_Eq                             = checkbox(False, label='Integral plot')):
+                if plotEq == True and inter_Eq == True:
+                    Pa = plot(a)
+                    Pb = plot(b)
+                    show(Pa + Pb)
+                elif plotEq == True:
+                    Pa = plot(a)
+                    show(Pa)
+                elif inter_Eq == True:
+                    Pb = plot(b)
+                    show(Pb)
+    elif Selections == 'Differentiate':
+        @interact
+        def __(a=input_box(e^x + x^2*log(x) + 5*cos(pi*x), 'What would you like to differetiate?')):
+            b = a.diff(x)
+            html('$$ d/dx (%s) = %s$$' %(latex(a), latex(b)))
+            @interact
+            def __(Integral = text_control("Would you like to see a plot?"), plotEq = checkbox(False, label='Equation plot') , inter_Eq                             = checkbox(False, label='Derivitive plot')):
+                if plotEq == True and inter_Eq == True:
+                    Pa = plot(a)
+                    Pb = plot(b)
+                    show(Pa + Pb)
+                elif plotEq == True:
+                    Pa = plot(a)
+                    show(Pa)
+                elif inter_Eq == True:
+                    Pb = plot(b)
+                    show(Pb)
+    elif Selections == 'Plot':
+        @interact
+        def __(a = input_box(e^x + x^2*log(x) + 5*cos(pi*x), 'What would you like to plot?')):
+            P = plot(a)
+            show(a)
+            show(P)
+︡ed43058f-d636-4bd0-9e57-2da7fe4bf339︡{"interact":{"style":"None","flicker":false,"layout":[[["Start",12,null]],[["Selections",12,null]],[["",12,null]]],"id":"614337ad-c1a0-4135-bdf6-8117b4488046","controls":[{"default":"What would you like to do?","var":"Start","classes":null,"control_type":"text","label":"Start"},{"buttons":false,"control_type":"selector","ncols":3,"button_classes":null,"default":5,"lbls":["Linear Algebra","Integrate","Differentiate","Trig","Plot","nothing"],"label":"Sections","nrows":2,"width":null,"var":"Selections"}]}}︡
+︠f369bbf2-c1f6-4290-8332-cbce086e2d70︠
+
+
+
+
+︠e3a0f67f-a01e-494f-a75b-f1a5d9060e73︠
+
+︠c6abdbbe-0c2e-4475-94fe-1edf71d5b1ef︠
+
+︠1e5a6e6e-99b8-4465-9430-5554b16dff58︠
+
+
+
+
+
+
+
+
+
+
